@@ -1,0 +1,567 @@
+{
+  "info": {
+    "name": "Habit Tracker API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/auth/register",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"Test123!@#\",\n  \"name\": \"Test User\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/auth/login",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"Test123!@#\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Get Profile",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/auth/profile",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Update Profile",
+          "request": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/auth/profile",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Name\",\n  \"email\": \"updated@example.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Change Password",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/auth/change-password",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"currentPassword\": \"Test123!@#\",\n  \"newPassword\": \"NewTest123!@#\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Forgot Password",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/auth/forgot-password",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"test@example.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Reset Password",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/auth/reset-password",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"token\": \"{{resetToken}}\",\n  \"password\": \"NewTest123!@#\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Habits",
+      "item": [
+        {
+          "name": "Create Habit",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/habits",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Daily Exercise\",\n  \"description\": \"30 minutes of exercise\",\n  \"category\": \"fitness\",\n  \"frequency\": \"daily\",\n  \"target\": 1,\n  \"reminderEnabled\": true,\n  \"reminderTime\": \"08:00\",\n  \"startDate\": \"2023-01-01T00:00:00.000Z\",\n  \"endDate\": \"2023-12-31T23:59:59.999Z\",\n  \"priority\": \"high\",\n  \"tags\": [\"health\", \"fitness\"]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Get Habits",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/habits",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "query": [
+              {
+                "key": "page",
+                "value": "1"
+              },
+              {
+                "key": "limit",
+                "value": "10"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Get Habit",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/habits/{{habitId}}",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Update Habit",
+          "request": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/habits/{{habitId}}",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Updated Exercise\",\n  \"description\": \"45 minutes of exercise\",\n  \"category\": \"fitness\",\n  \"frequency\": \"daily\",\n  \"target\": 1,\n  \"reminderEnabled\": true,\n  \"reminderTime\": \"09:00\",\n  \"startDate\": \"2023-01-01T00:00:00.000Z\",\n  \"endDate\": \"2023-12-31T23:59:59.999Z\",\n  \"priority\": \"high\",\n  \"tags\": [\"health\", \"fitness\"]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Delete Habit",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/habits/{{habitId}}",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Check-ins",
+      "item": [
+        {
+          "name": "Create Check-in",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/checkins",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"habitId\": \"{{habitId}}\",\n  \"date\": \"2023-01-01T00:00:00.000Z\",\n  \"status\": true,\n  \"note\": \"Completed 30 minutes of exercise\",\n  \"mood\": \"great\",\n  \"duration\": 30,\n  \"location\": {\n    \"latitude\": 40.7128,\n    \"longitude\": -74.0060\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Get Check-ins",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/checkins",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "query": [
+              {
+                "key": "habitId",
+                "value": "{{habitId}}"
+              },
+              {
+                "key": "startDate",
+                "value": "2023-01-01T00:00:00.000Z"
+              },
+              {
+                "key": "endDate",
+                "value": "2023-12-31T23:59:59.999Z"
+              },
+              {
+                "key": "status",
+                "value": "true"
+              },
+              {
+                "key": "mood",
+                "value": "great"
+              },
+              {
+                "key": "page",
+                "value": "1"
+              },
+              {
+                "key": "limit",
+                "value": "10"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Get Check-in",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/checkins/{{checkInId}}",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Update Check-in",
+          "request": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/checkins/{{checkInId}}",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"habitId\": \"{{habitId}}\",\n  \"date\": \"2023-01-01T00:00:00.000Z\",\n  \"status\": true,\n  \"note\": \"Updated: Completed 45 minutes of exercise\",\n  \"mood\": \"good\",\n  \"duration\": 45,\n  \"location\": {\n    \"latitude\": 40.7128,\n    \"longitude\": -74.0060\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Delete Check-in",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/checkins/{{checkInId}}",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Notifications",
+      "item": [
+        {
+          "name": "Get Notifications",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/notifications",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "query": [
+              {
+                "key": "read",
+                "value": "false"
+              },
+              {
+                "key": "page",
+                "value": "1"
+              },
+              {
+                "key": "limit",
+                "value": "10"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Get Unread Count",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/notifications/unread/count",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Mark as Read",
+          "request": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/notifications/{{notificationId}}/read",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Mark All as Read",
+          "request": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/notifications/read/all",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Delete Notification",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/notifications/{{notificationId}}",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Delete All Notifications",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/notifications/all",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Analytics",
+      "item": [
+        {
+          "name": "Get Habit Stats",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/analytics/habits/{{habitId}}",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "query": [
+              {
+                "key": "startDate",
+                "value": "2023-01-01T00:00:00.000Z"
+              },
+              {
+                "key": "endDate",
+                "value": "2023-12-31T23:59:59.999Z"
+              },
+              {
+                "key": "period",
+                "value": "week"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Get User Stats",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/analytics/user",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "query": [
+              {
+                "key": "startDate",
+                "value": "2023-01-01T00:00:00.000Z"
+              },
+              {
+                "key": "endDate",
+                "value": "2023-12-31T23:59:59.999Z"
+              },
+              {
+                "key": "period",
+                "value": "month"
+              },
+              {
+                "key": "page",
+                "value": "1"
+              },
+              {
+                "key": "limit",
+                "value": "10"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Export Data",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/analytics/export",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "query": [
+              {
+                "key": "startDate",
+                "value": "2023-01-01T00:00:00.000Z"
+              },
+              {
+                "key": "endDate",
+                "value": "2023-12-31T23:59:59.999Z"
+              },
+              {
+                "key": "format",
+                "value": "json"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000/api"
+    },
+    {
+      "key": "token",
+      "value": "your_jwt_token_here"
+    },
+    {
+      "key": "habitId",
+      "value": "your_habit_id_here"
+    },
+    {
+      "key": "checkInId",
+      "value": "your_checkin_id_here"
+    },
+    {
+      "key": "notificationId",
+      "value": "your_notification_id_here"
+    },
+    {
+      "key": "resetToken",
+      "value": "your_reset_token_here"
+    }
+  ]
+} 
